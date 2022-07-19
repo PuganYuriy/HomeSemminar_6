@@ -4,31 +4,34 @@
 // 1 -3,3 8 -9,9
 // 8 7,8 -7,1 9
 
-int[,] generateRandomArray(int n, int m, int minValue, int maxValue) // создание функции для создания двухмерного массива
+double[,] generateRandomArrayFloat(int n, int m) // создание функции для создания двухмерного массива
 {
-    int[,] randomArray = new int [n, m];
+    double[,] randomArray = new double [n, m];
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-        randomArray[i, j] = new Random().Next(minValue, maxValue + 1); //заполнение массива случайными числами
+            randomArray[i, j] = new Random().NextDouble() * 100 - 10; //заполнение массива случайными числами
+            
         }
     }
     return randomArray;
 }
 
-void printRandomArray(int [,] array) // создание метода для вывода массива на консоль
+void printRandomArray(double [,] array) // создание метода для вывода массива на консоль
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            Console.Write($"{array[i, j]} ");
+            double bitВepth = Math.Round (array [i, j], 2);
+            Console.Write($"{bitВepth}; ");
         }
     Console.WriteLine(" ");
     }
 }
-
+Console.Clear();
+Console.WriteLine("Задайте двумерный массив размером m и n, заполненный случайными вещественными числами");
 Console.Write("Введите количество строк массива: ");
 int rows=Convert.ToInt32(Console.ReadLine());
 
@@ -38,7 +41,7 @@ int columns=Convert.ToInt32(Console.ReadLine());
 Console.Write($"m = {rows}, ");
 Console.Write($"n = {columns}");
 Console.WriteLine(" ");
-int[,] array = generateRandomArray(rows, columns, -100, +100);
+double[,] array = generateRandomArrayFloat(rows, columns);
 printRandomArray(array);
 
 // Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
